@@ -1,4 +1,6 @@
 import { ReactElement } from 'react';
+import useRenderItem from './hooks/useRenderItem';
+import { isJsonTypes } from './utils';
 
 interface JsonViewerProperties {
 	data: Record<string, unknown>;
@@ -7,5 +9,16 @@ interface JsonViewerProperties {
 export default function JsonViewer({
 	data
 }: JsonViewerProperties): ReactElement {
-	return <div>{JSON.stringify(data)}</div>;
+	const { renderItem } = useRenderItem();
+	return (
+		<div>
+			{Object.entries(data).map(([key, item]) => {
+				if (isJsonTypes(item)) {
+					return renderItem(item, key);
+				}
+				console.error(key, item);
+				throw new Error('Item type not recognized');
+			})}
+		</div>
+	);
 }
