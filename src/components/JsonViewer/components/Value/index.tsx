@@ -7,7 +7,7 @@ export default function Value({
 }): ReactElement {
 	return (
 		<span className='text-base font-normal'>
-			{typeof value === 'string' ? `"${value}"` : value}
+			{typeof value === 'string' ? `"${value}"` : String(value)}
 		</span>
 	);
 }
