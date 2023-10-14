@@ -11,7 +11,7 @@ export default function JsonViewer({
 }: JsonViewerProperties): ReactElement {
 	const { renderItem } = useRenderItem();
 	return (
-		<div>
+		<div className='min-w-[39.875rem]'>
 			{Object.entries(data).map(([key, item]) => {
 				if (isJsonTypes(item)) {
 					return renderItem(item, key);
