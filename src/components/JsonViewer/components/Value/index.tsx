@@ -5,5 +5,9 @@ export default function Value({
 }: {
 	value: string | number | boolean | null;
 }): ReactElement {
-	return <span className='text-base font-normal'>{value}</span>;
+	return (
+		<span className='text-base font-normal'>
+			{typeof value === 'string' ? `"${value}"` : value}
+		</span>
+	);
 }
