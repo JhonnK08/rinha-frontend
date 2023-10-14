@@ -16,9 +16,9 @@ export default function useRenderItem(): UseRenderItemResponse {
 			case 'string':
 			case 'number':
 				return (
-					<>
+					<div className='flex items-start justify-start gap-x-1'>
 						<Property property={property} /> <Value value={item} />
-					</>
+					</div>
 				);
 			case 'object': {
 				// Array, object or null
