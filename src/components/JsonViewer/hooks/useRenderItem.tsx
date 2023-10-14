@@ -23,7 +23,12 @@ export default function useRenderItem(): UseRenderItemResponse {
 			case 'object': {
 				// Array, object or null
 				if (item === null) {
-					return <Value value={item} />;
+					return (
+						<div className='flex items-start justify-start gap-x-1'>
+							<Property property={property} />{' '}
+							<Value value={item} />
+						</div>
+					);
 				}
 				if (Array.isArray(item) && property) {
 					return <ArrayValue array={item} property={property} />;
