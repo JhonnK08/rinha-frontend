@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import useRenderItem from '../../hooks/useRenderItem';
+import { isJsonTypes } from '../../utils';
 import Property from '../Property';
 
 interface ObjectValueProperties {
@@ -20,7 +21,13 @@ export default function ObjectValue({
 				<span className='font-bold text-peach-200'>{'{'}</span>
 			</div>
 			<div className='flex flex-col items-start justify-start gap-y-1 border-l border-grey pl-5'>
-				{renderItem(object, property)}
+				{Object.entries(object).map(([key, item]) => {
+					if (isJsonTypes(item)) {
+						return renderItem(item, key);
+					}
+					console.error(key, item);
+					throw new Error('Item type not recognized');
+				})}
 			</div>
 			<span className='font-bold text-peach-200'>{'}'}</span>
 		</div>
