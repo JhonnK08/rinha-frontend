@@ -8,3 +8,7 @@ export function isJsonTypes(item: unknown): item is JsonTypes {
 		typeof item === 'object'
 	);
 }
+
+export function isObject(item: unknown): item is Record<string, unknown> {
+	return typeof item === 'object' && !!item;
+}
