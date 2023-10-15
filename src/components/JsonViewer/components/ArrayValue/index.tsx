@@ -1,9 +1,12 @@
+import classNames from 'classnames';
 import { ReactElement } from 'react';
 import useRenderItem from '../../hooks/useRenderItem';
+import { JsonTypes } from '../../types';
+import { isObject } from '../../utils';
 import Property from '../Property';
 
 interface ArrayValueProperties {
-	array: Array<Record<string, unknown>>;
+	array: Array<JsonTypes>;
 	property: string;
 }
 
@@ -22,12 +25,18 @@ export default function ArrayValue({
 			<div className='border-l border-grey pl-5'>
 				{array.map((item, index) => (
 					<div
-						className='flex flex-col items-start justify-start'
+						className={classNames(
+							'flex items-start justify-start',
+							{
+								'flex-col': isObject(item),
+								'gap-x-1': !isObject(item)
+							}
+						)}
 						key={`${String(item)}-${String(index)}`}
 					>
 						<span className='text-grey'>{index}:</span>
-						<div className='flex flex-col items-start justify-start gap-y-1 border-l border-grey pl-5'>
-							{renderItem(item, property)}
+						<div className='flex flex-col items-start justify-start gap-y-1'>
+							{renderItem(item)}
 						</div>
 					</div>
 				))}
