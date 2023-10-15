@@ -17,8 +17,13 @@ export default {
       normal: 400,
       medium: 500,
       bold: 700,
-    }
+    },
   },
-  plugins: [],
+  plugins: [
+    import('tailwind-scrollbar')
+  ],
+  variants: {
+    scrollbar: ['rounded']
+  }
 }
 

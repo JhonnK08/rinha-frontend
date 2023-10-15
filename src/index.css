@@ -40,3 +40,15 @@ body {
 	background-color: #ffffff;
 	color: #000000;
 }
+
+::-webkit-scrollbar {
+	width: 8px !important;
+	height: 8px !important;
+}
+::-webkit-scrollbar-track {
+	border-radius: 0.25rem;
+}
+::-webkit-scrollbar-thumb {
+	background: #bfbfbf;
+	border-radius: 0.25rem;
+}
