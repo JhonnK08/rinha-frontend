@@ -12,6 +12,7 @@ export default function FileJsonInput({
 	const [file, setFile] = useState<File>();
 	const [data, setData] = useState<Record<string, unknown>>();
 	const [error, setError] = useState<string>();
+	const [disabled, setDisabled] = useState(false);
 
 	const inputReference = useRef<HTMLInputElement | null>(null);
 
@@ -21,6 +22,7 @@ export default function FileJsonInput({
 		}
 
 		if (event.target.files[0]) {
+			setDisabled(true);
 			setFile(event.target.files[0]);
 			const fileReader = new FileReader();
 			fileReader.onload = () => {
@@ -45,6 +47,8 @@ export default function FileJsonInput({
 				} catch (error) {
 					console.error(error);
 					resetFileInput(event);
+					setDisabled(false);
+
 					setError('Invalid file. Please load a valid JSON file.');
 				}
 			};
@@ -59,9 +63,10 @@ export default function FileJsonInput({
 
 	useEffect(() => {
 		if (file && data) {
+			setDisabled(false);
 			onGetData(data, file.name);
 		}
-	}, [file, data]);
+	}, [file, data, onGetData]);
 
 	return (
 		<div className='flex flex-col items-center gap-y-6'>
@@ -72,7 +77,11 @@ export default function FileJsonInput({
 				className='hidden'
 				accept='application/json'
 			/>
-			<Button onClick={handleUploadClick} className='w-[6.875rem]'>
+			<Button
+				onClick={handleUploadClick}
+				className='w-[6.875rem]'
+				disabled={disabled}
+			>
 				Load JSON
 			</Button>
 			{error && (
