@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { nanoid } from 'nanoid';
 import { ReactElement } from 'react';
 import useRenderItem from '../../hooks/useRenderItem';
 import { JsonTypes } from '../../types';
@@ -32,7 +33,7 @@ export default function ArrayValue({
 								'gap-x-1': !isObject(item)
 							}
 						)}
-						key={`${String(item)}-${String(index)}`}
+						key={`${String(item)}-${String(index)}-${nanoid()}`}
 					>
 						<span className='text-grey'>{index}:</span>
 						<div className='flex flex-col items-start justify-start gap-y-1'>
